@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from '@/components/nav'
 export default class Login extends React.Component{
   constructor(props, context) {
     super(props)
@@ -9,7 +10,10 @@ export default class Login extends React.Component{
   render() {
     return (
       <div>
-        mine
+        <div>
+          mine
+        </div>
+        <Nav index={3}></Nav>
       </div>
     )
   }

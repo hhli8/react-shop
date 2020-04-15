@@ -1,7 +1,11 @@
 import React from 'react'
 import './index.scss'
 import ShopList from './child/shoplist.js'
-export default class ShopCar extends React.Component{
+import Nav from '@/components/nav'
+import Calcutale from './child/calcutale.js'
+import {connect} from 'react-redux'
+import { setList } from '@/redux/actions/shopcarAction.js'
+class ShopCar extends React.Component{
   constructor(props, context) {
     super(props)
     this.state = {
@@ -10,30 +14,40 @@ export default class ShopCar extends React.Component{
   }
   componentDidMount() {
     setTimeout(() => {
-      this.setState({
-        shops: [
-          {
-            icon: '',
-            shopname: '阿达啊as12',
-            goods: [{ price: 12.22, count: 1, selected: true }]
-          },
-          {
-            icon: '',
-            shopname: 'dfgdg大幅度发的',
-            goods: [{ price: 238, count: 1 }, { price: 238, count: 2 }, { price: 238, count: 3 }, { price: 238, count: 4 }, { price: 238, count: 5 }, { price: 238, count: 1 }, { price: 238, count: 2 }, { price: 238, count: 3 }, { price: 238, count: 4 }, { price: 238, count: 5 }]
-          }
-        ]
-      })
+      let shops = [
+        {
+          icon: '',
+          shopname: '阿达啊as12',
+          goods: [{ price: 12.22, count: 1 }]
+        },
+        {
+          icon: '',
+          shopname: 'dfgdg大幅度发的',
+          goods: [{ price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }, { price: 238, count: 2 }]
+        }
+      ]
+//    this.setState({
+//      shops
+//    })
+      this.props.setList(shops)
     })
   }
   render() {
     return (
       <div>
         <div className="page-shopcar">
-          <ShopList list={this.state.shops}/>
+          <ShopList list={this.props.shopcar.list}/>
         </div>
-        <div></div>
+        <Nav index={2}>
+          <Calcutale/>
+        </Nav>
       </div>
     )
   }
 }
+const mapStateToProps = state => ({
+  shopcar: state.shopcar
+})
+
+const actionCreators = { setList }
+export default connect(mapStateToProps, actionCreators)(ShopCar)

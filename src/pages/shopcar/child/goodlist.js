@@ -6,7 +6,7 @@ export default class GoodList extends React.Component{
     let goods = props.goods
     let list = goods.map((item, index) =>{
       return (
-        <Good item={item} index={index} key={index}/>
+        <Good item={item} sindex={props.index} gindex={index} key={index}/>
       )
     })
     this.state = {

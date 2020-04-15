@@ -1,0 +1,29 @@
+.tabBar-wrap {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 2000;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+  box-shadow: 0 8px 15px 10px rgba(0, 0, 0, 0.06);
+  .item {
+    flex: 1;
+    text-align: center;
+    .iconfont {
+      font-size: 36px;
+      display: block;
+      margin-top: 6px;
+    }
+    .name {
+      font-size: 20px;
+    }
+  }
+  .item.act {
+    color: #ED145B;
+  }
+}

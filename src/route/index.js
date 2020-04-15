@@ -13,6 +13,8 @@ import asyncComponent from '@/utils/asyncComponent'
 
 import home from '@/pages/default'
 const shopCar = asyncComponent(() => import('@/pages/shopcar'))
+const classify = asyncComponent(() => import('@/pages/classify'))
+const mine = asyncComponent(() => import('@/pages/mine'))
 
 // const history = createHistory()
 // const history = createHashHistory()
@@ -35,6 +37,8 @@ export default () => (
     <Switch>
       <Route path="/" exact component={home} />
       <Route path="/shopcar" component={shopCar} />
+      <Route path="/classify" component={classify} />
+      <Route path="/mine" component={mine} />
       <Redirect to="/" />
     </Switch>
   </HashRouter>
