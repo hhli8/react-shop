@@ -3,7 +3,7 @@ import './index.scss'
 import ShopList from './child/shoplist.js'
 import Nav from '@/components/nav'
 import Calcutale from './child/calcutale.js'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { setList } from '@/redux/actions/shopcarAction.js'
 class ShopCar extends React.Component{
   constructor(props, context) {
