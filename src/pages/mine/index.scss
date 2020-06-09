@@ -1,0 +1,58 @@
+.p-mine {
+    font-size: 28px;
+    .head {
+        &-bg {
+            height: 340px;
+            background: url('~@/assets/img/bg-mine-head.png') no-repeat center;
+            background-size: 100% 100%;
+            .header {
+                display: flex;
+                align-items: center;
+                padding: 50px 0 0 30px;
+                &-pic {
+                    width: 120px;
+                    height: 120px;
+                    border: 4px solid #fff;
+                    border-radius: 50%;
+                    margin-right: 30px;
+                }
+                &-nick {
+                    font-size: 34px;
+                    color: #fff;
+                }
+            }
+        }
+        &-list {
+            height: 50px;
+            position: relative;
+            &-con {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 150px;
+                width: 100%;
+                padding: 0 20px;
+                box-sizing: border-box;
+                .lists {
+                    background: #fff;
+                    border-radius: 10px;
+                    height: 100%;
+                    .item {
+                        flex: 1;
+                        text-align: center;
+                        padding: 20px;
+                        .iconfont {
+                            color: #EF2F6E;
+                            font-size: 40px;
+                        }
+                        .name {
+                            color: #636363;
+                            font-size: 24px;
+                            margin-top: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

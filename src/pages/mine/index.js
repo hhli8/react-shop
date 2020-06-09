@@ -1,20 +1,153 @@
 import React from 'react'
 import Nav from '@/components/nav'
-export default class Login extends React.Component{
+import './index.scss'
+// import Weather from './child/weather'
+import Monline from './child/monline'
+import Test from './child/test'
+import {connect} from 'react-redux'
+import { setWeather, setOnlineMovie } from '@/redux/actions/mineAction.js'
+import { Link } from 'react-router-dom'
+class Mine extends React.Component{
   constructor(props, context) {
     super(props)
+    let tabs = [
+      { name: '待付款', icon: '&#xe60b;', type: 'b100' },
+      { name: '待发货', icon: '&#xe615;', type: 'b101' },
+      { name: '待收货', icon: '&#xe605;', type: 'b102' },
+      { name: '待评价', icon: '&#xe60c;', type: 'b103' }
+    ]
+    let tablist = tabs.map((item, index) =>{
+      return (
+        <div key={index} className="item" >
+          <div className="item-tap">
+            <span className="iconfont" dangerouslySetInnerHTML={{ __html: item.icon }}></span>
+            <div className="name">{item.name}</div>
+          </div>
+        </div>
+      )
+    })
     this.state = {
-      //
+      tablist,
+      weather: {},
+      monline: []
     }
+    
+    // this.handleClick = this.handleClick.bind(this);
+    // <button onClick={this.handleClick}>
+    // or
+    // onClick={() => {this.jump('item')}}
+    
+    
+  }
+  testFetch = () => {
+    // 42548743 U4tegk3r
+    fetch('https://www.tianqiapi.com/free/day?appid=42548743&appsecret=U4tegk3r', {
+      method:'get'
+      /* headers: {
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+      }, */
+      // credentials: 'include'
+    }).then((res) => {
+      return res.json()
+    }).then((data) => {
+      // console.log(data)
+      this.props.setWeather(data)
+    })
+  }
+  getMovies = () => {
+    fetch('https://douban.uieee.com/v2/movie/in_theaters?city=杭州', {
+      method:'get'
+    }).then((res) => {
+      return res.json()
+    }).then((data) => {
+      // console.log(data)
+      // var str = `[{"rating":{"max":10,"average":8.2,"details":{"1":145,"2":936,"3":16567,"4":55036,"5":28394},"stars":"40","min":0},"genres":["剧情","喜剧","犯罪"],"title":"利刃出鞘","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg"},"name_en":"Daniel Craig","name":"丹尼尔·克雷格","alt":"https://movie.douban.com/celebrity/1025175/","id":"1025175"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg"},"name_en":"Ana de Armas","name":"安娜·德·阿玛斯","alt":"https://movie.douban.com/celebrity/1045259/","id":"1045259"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg"},"name_en":"Chris Evans","name":"克里斯·埃文斯","alt":"https://movie.douban.com/celebrity/1017885/","id":"1017885"}],"durations":["130分钟"],"collect_count":568648,"mainland_pubdate":"2019-11-29","has_video":true,"original_title":"Knives Out","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg"},"name_en":"Rian Johnson","name":"莱恩·约翰逊","alt":"https://movie.douban.com/celebrity/1036605/","id":"1036605"}],"pubdates":["2019-09-07(多伦多电影节)","2019-11-27(美国)","2019-11-29(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg"},"alt":"https://movie.douban.com/subject/30318116/","id":"30318116"},{"rating":{"max":10,"average":9.5,"details":{"1":861,"2":1457,"3":18040,"4":141621,"5":648414},"stars":"50","min":0},"genres":["剧情","喜剧","爱情"],"title":"美丽人生","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg"},"name_en":"Roberto Benigni","name":"罗伯托·贝尼尼","alt":"https://movie.douban.com/celebrity/1041004/","id":"1041004"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg"},"name_en":"Nicoletta Braschi","name":"尼可莱塔·布拉斯基","alt":"https://movie.douban.com/celebrity/1000375/","id":"1000375"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg"},"name_en":"Giorgio Cantarini","name":"乔治·坎塔里尼","alt":"https://movie.douban.com/celebrity/1000368/","id":"1000368"}],"durations":["116分钟","125分钟(戛纳电影节)"],"collect_count":1403889,"mainland_pubdate":"2020-01-03","has_video":true,"original_title":"La vita è bella","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg"},"name_en":"Roberto Benigni","name":"罗伯托·贝尼尼","alt":"https://movie.douban.com/celebrity/1041004/","id":"1041004"}],"pubdates":["1997-12-20(意大利)","2020-01-03(中国大陆)"],"year":"1997","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg"},"alt":"https://movie.douban.com/subject/1292063/","id":"1292063"},{"rating":{"max":10,"average":8.2,"details":{"1":14,"2":120,"3":2571,"4":10885,"5":5159},"stars":"45","min":0},"genres":["剧情"],"title":"理查德·朱维尔的哀歌","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg"},"name_en":"Paul Walter Hauser","name":"保罗·沃尔特·豪泽","alt":"https://movie.douban.com/celebrity/1268250/","id":"1268250"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg"},"name_en":"Sam Rockwell","name":"山姆·洛克威尔","alt":"https://movie.douban.com/celebrity/1047972/","id":"1047972"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg"},"name_en":"Kathy Bates","name":"凯西·贝茨","alt":"https://movie.douban.com/celebrity/1010555/","id":"1010555"}],"durations":["131分钟"],"collect_count":71753,"mainland_pubdate":"2020-01-10","has_video":true,"original_title":"Richard Jewell","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg"},"name_en":"Clint Eastwood","name":"克林特·伊斯特伍德","alt":"https://movie.douban.com/celebrity/1054436/","id":"1054436"}],"pubdates":["2019-11-20(AFI Fest)","2019-12-13(美国)","2020-01-10(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg"},"alt":"https://movie.douban.com/subject/25842038/","id":"25842038"},{"rating":{"max":10,"average":5.6,"details":{"1":146,"2":750,"3":1289,"4":345,"5":62},"stars":"30","min":0},"genres":["科幻","惊悚"],"title":"灭绝","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg"},"name_en":"Michael Peña","name":"迈克尔·佩纳","alt":"https://movie.douban.com/celebrity/1131634/","id":"1131634"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg"},"name_en":"Lizzy Caplan","name":"丽兹·卡潘","alt":"https://movie.douban.com/celebrity/1009234/","id":"1009234"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg"},"name_en":"Israel Broussard","name":"伊瑟尔·布罗萨德","alt":"https://movie.douban.com/celebrity/1023036/","id":"1023036"}],"durations":["95分钟","93分钟(中国大陆)"],"collect_count":17215,"mainland_pubdate":"2020-01-18","has_video":true,"original_title":"Extinction","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg"},"name_en":"Ben Young","name":"本·扬","alt":"https://movie.douban.com/celebrity/1373883/","id":"1373883"}],"pubdates":["2018-07-27(美国)","2020-01-18(中国大陆)"],"year":"2018","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg"},"alt":"https://movie.douban.com/subject/26871938/","id":"26871938"},{"rating":{"max":10,"average":7.5,"details":{"1":49,"2":236,"3":1411,"4":1722,"5":940},"stars":"40","min":0},"genres":["剧情","动画"],"title":"紫罗兰永恒花园外传：永远与自动手记人偶","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg"},"name_en":"Yui Ishikawa","name":"石川由依","alt":"https://movie.douban.com/celebrity/1329107/","id":"1329107"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg"},"name_en":"Minori Chihara","name":"茅原实里","alt":"https://movie.douban.com/celebrity/1042757/","id":"1042757"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg"},"name_en":"Aya Endô","name":"远藤绫","alt":"https://movie.douban.com/celebrity/1008446/","id":"1008446"}],"durations":["91分钟"],"collect_count":36625,"mainland_pubdate":"2020-01-10","has_video":true,"original_title":"ヴァイオレット・エヴァーガーデン 外伝 - 永遠と自動手記人形 -","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg"},"name_en":"Fujita Haruka","name":"藤田春香","alt":"https://movie.douban.com/celebrity/1420526/","id":"1420526"}],"pubdates":["2019-09-06(日本)","2020-01-10(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg"},"alt":"https://movie.douban.com/subject/33424345/","id":"33424345"},{"rating":{"max":10,"average":8.8,"details":{"1":14,"2":77,"3":1319,"4":6305,"5":7484},"stars":"45","min":0},"genres":["纪录片","音乐"],"title":"坂本龙一：终曲","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg"},"name_en":"Ryuichi Sakamoto","name":"坂本龙一","alt":"https://movie.douban.com/celebrity/1148641/","id":"1148641"}],"durations":["100分钟"],"collect_count":56187,"mainland_pubdate":"2019-12-16","has_video":false,"original_title":"Ryuichi Sakamoto: CODA","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg"},"name_en":"Stephen Nomura Schible","name":"史蒂芬·野村·斯奇博","alt":"https://movie.douban.com/celebrity/1384928/","id":"1384928"}],"pubdates":["2017-09-03(威尼斯电影节)","2017-11-01(日本)","2019-12-16(中国大陆)"],"year":"2017","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg"},"alt":"https://movie.douban.com/subject/26984189/","id":"26984189"}]`
+      // console.log(JSON.stringify(data.subjects))
+      this.props.setOnlineMovie(data.subjects)
+    })
+  }
+  componentDidMount() {
+    // this.testFetch()
+    /* this.timer = setInterval(() => {
+      this.testFetch()
+    }, 5000000000) */
+    // this.getMovies()
+    var str = `[{"rating":{"max":10,"average":8.2,"details":{"1":145,"2":936,"3":16567,"4":55036,"5":28394},"stars":"40","min":0},"genres":["剧情","喜剧","犯罪"],"title":"利刃出鞘","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p42588.jpg"},"name_en":"Daniel Craig","name":"丹尼尔·克雷格","alt":"https://movie.douban.com/celebrity/1025175/","id":"1025175"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1506497192.11.jpg"},"name_en":"Ana de Armas","name":"安娜·德·阿玛斯","alt":"https://movie.douban.com/celebrity/1045259/","id":"1045259"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1359877729.49.jpg"},"name_en":"Chris Evans","name":"克里斯·埃文斯","alt":"https://movie.douban.com/celebrity/1017885/","id":"1017885"}],"durations":["130分钟"],"collect_count":568648,"mainland_pubdate":"2019-11-29","has_video":true,"original_title":"Knives Out","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p55599.jpg"},"name_en":"Rian Johnson","name":"莱恩·约翰逊","alt":"https://movie.douban.com/celebrity/1036605/","id":"1036605"}],"pubdates":["2019-09-07(多伦多电影节)","2019-11-27(美国)","2019-11-29(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574172427.jpg"},"alt":"https://movie.douban.com/subject/30318116/","id":"30318116"},{"rating":{"max":10,"average":9.5,"details":{"1":861,"2":1457,"3":18040,"4":141621,"5":648414},"stars":"50","min":0},"genres":["剧情","喜剧","爱情"],"title":"美丽人生","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg"},"name_en":"Roberto Benigni","name":"罗伯托·贝尼尼","alt":"https://movie.douban.com/celebrity/1041004/","id":"1041004"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9548.jpg"},"name_en":"Nicoletta Braschi","name":"尼可莱塔·布拉斯基","alt":"https://movie.douban.com/celebrity/1000375/","id":"1000375"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p45590.jpg"},"name_en":"Giorgio Cantarini","name":"乔治·坎塔里尼","alt":"https://movie.douban.com/celebrity/1000368/","id":"1000368"}],"durations":["116分钟","125分钟(戛纳电影节)"],"collect_count":1403889,"mainland_pubdate":"2020-01-03","has_video":true,"original_title":"La vita è bella","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p26764.jpg"},"name_en":"Roberto Benigni","name":"罗伯托·贝尼尼","alt":"https://movie.douban.com/celebrity/1041004/","id":"1041004"}],"pubdates":["1997-12-20(意大利)","2020-01-03(中国大陆)"],"year":"1997","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578474613.jpg"},"alt":"https://movie.douban.com/subject/1292063/","id":"1292063"},{"rating":{"max":10,"average":8.2,"details":{"1":14,"2":120,"3":2571,"4":10885,"5":5159},"stars":"45","min":0},"genres":["剧情"],"title":"理查德·朱维尔的哀歌","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1579450902.87.jpg"},"name_en":"Paul Walter Hauser","name":"保罗·沃尔特·豪泽","alt":"https://movie.douban.com/celebrity/1268250/","id":"1268250"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1533802988.44.jpg"},"name_en":"Sam Rockwell","name":"山姆·洛克威尔","alt":"https://movie.douban.com/celebrity/1047972/","id":"1047972"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p5690.jpg"},"name_en":"Kathy Bates","name":"凯西·贝茨","alt":"https://movie.douban.com/celebrity/1010555/","id":"1010555"}],"durations":["131分钟"],"collect_count":71753,"mainland_pubdate":"2020-01-10","has_video":true,"original_title":"Richard Jewell","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1438777188.48.jpg"},"name_en":"Clint Eastwood","name":"克林特·伊斯特伍德","alt":"https://movie.douban.com/celebrity/1054436/","id":"1054436"}],"pubdates":["2019-11-20(AFI Fest)","2019-12-13(美国)","2020-01-10(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578705064.jpg"},"alt":"https://movie.douban.com/subject/25842038/","id":"25842038"},{"rating":{"max":10,"average":5.6,"details":{"1":146,"2":750,"3":1289,"4":345,"5":62},"stars":"30","min":0},"genres":["科幻","惊悚"],"title":"灭绝","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1454118774.76.jpg"},"name_en":"Michael Peña","name":"迈克尔·佩纳","alt":"https://movie.douban.com/celebrity/1131634/","id":"1131634"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1386855236.97.jpg"},"name_en":"Lizzy Caplan","name":"丽兹·卡潘","alt":"https://movie.douban.com/celebrity/1009234/","id":"1009234"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509274635.63.jpg"},"name_en":"Israel Broussard","name":"伊瑟尔·布罗萨德","alt":"https://movie.douban.com/celebrity/1023036/","id":"1023036"}],"durations":["95分钟","93分钟(中国大陆)"],"collect_count":17215,"mainland_pubdate":"2020-01-18","has_video":true,"original_title":"Extinction","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/puqS3biE9tVocel_avatar_uploaded1494750717.23.jpg"},"name_en":"Ben Young","name":"本·扬","alt":"https://movie.douban.com/celebrity/1373883/","id":"1373883"}],"pubdates":["2018-07-27(美国)","2020-01-18(中国大陆)"],"year":"2018","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2579512247.jpg"},"alt":"https://movie.douban.com/subject/26871938/","id":"26871938"},{"rating":{"max":10,"average":7.5,"details":{"1":49,"2":236,"3":1411,"4":1722,"5":940},"stars":"40","min":0},"genres":["剧情","动画"],"title":"紫罗兰永恒花园外传：永远与自动手记人偶","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1370586618.47.jpg"},"name_en":"Yui Ishikawa","name":"石川由依","alt":"https://movie.douban.com/celebrity/1329107/","id":"1329107"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p4964.jpg"},"name_en":"Minori Chihara","name":"茅原实里","alt":"https://movie.douban.com/celebrity/1042757/","id":"1042757"},{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p21931.jpg"},"name_en":"Aya Endô","name":"远藤绫","alt":"https://movie.douban.com/celebrity/1008446/","id":"1008446"}],"durations":["91分钟"],"collect_count":36625,"mainland_pubdate":"2020-01-10","has_video":true,"original_title":"ヴァイオレット・エヴァーガーデン 外伝 - 永遠と自動手記人形 -","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1564396200.09.jpg"},"name_en":"Fujita Haruka","name":"藤田春香","alt":"https://movie.douban.com/celebrity/1420526/","id":"1420526"}],"pubdates":["2019-09-06(日本)","2020-01-10(中国大陆)"],"year":"2019","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2578722076.jpg"},"alt":"https://movie.douban.com/subject/33424345/","id":"33424345"},{"rating":{"max":10,"average":8.8,"details":{"1":14,"2":77,"3":1319,"4":6305,"5":7484},"stars":"45","min":0},"genres":["纪录片","音乐"],"title":"坂本龙一：终曲","casts":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1361853697.61.jpg"},"name_en":"Ryuichi Sakamoto","name":"坂本龙一","alt":"https://movie.douban.com/celebrity/1148641/","id":"1148641"}],"durations":["100分钟"],"collect_count":56187,"mainland_pubdate":"2019-12-16","has_video":false,"original_title":"Ryuichi Sakamoto: CODA","subtype":"movie","directors":[{"avatars":{"small":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg","large":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg","medium":"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1512007289.0.jpg"},"name_en":"Stephen Nomura Schible","name":"史蒂芬·野村·斯奇博","alt":"https://movie.douban.com/celebrity/1384928/","id":"1384928"}],"pubdates":["2017-09-03(威尼斯电影节)","2017-11-01(日本)","2019-12-16(中国大陆)"],"year":"2017","images":{"small":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg","large":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg","medium":"https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2575892083.jpg"},"alt":"https://movie.douban.com/subject/26984189/","id":"26984189"}]`
+    this.props.setOnlineMovie(JSON.parse(str))
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+  jump() {
+    this.props.history.push({
+      pathname: 'shopcar'
+    })
+  }
+  jumpdetail() {
+    this.props.history.push({
+      // pathname: '/movie-detail/asda/asda',
+      pathname: 'person-detail/asdads',
+      query: {
+        id: 123123,
+        type: 'asdak'
+      },
+      state: {
+        name: '西安市大'
+      }
+    })
+  }
+  createMarkup() {
+    // <pre dangerouslySetInnerHTML={this.createMarkup()}> </pre>
+    return {__html: `
+            // Correct
+            this.setState((state, props) => ({
+              counter: state.counter + props.increment
+            }));
+          `}
+  }
+  testClick(id, name, e) {
+    console.log(id, e, e.target)
   }
   render() {
     return (
-      <div>
-        <div>
-          mine
+      <div className="page-scroll-bottom">
+        <div className="flex1 p-mine">
+          <div className="head">
+            <div className="head-bg">
+              <div className="header">
+                <img className="header-pic" src="http://img.alicdn.com/imgextra/i3/1614112418/O1CN01fmdBm71TjUBQjY9y8_!!0-item_pic.jpg_640x640q80_.webp" alt="" /><span className="header-nick">昵称</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="head-list">
+            <div className="head-list-con">
+              <div className="lists-before">
+                <div className="lists flex">
+                  {this.state.tablist}
+                </div>
+              </div>
+            </div>
+          </div>
+          <Monline movie={this.props.mine.monline}/>
+          <div>测试:<input type="text"/></div>
+          <Link to="/shopcar">去购物车</Link>
+          <div onClick={() => {this.jump('item')}}>js去购物车</div>
+          <Link to="/movie-detail/123456">去详情:id</Link>
+          <Link to="/movie-detail/123456/uuyy">去详情:id</Link>
+          <div onClick={() => {this.jumpdetail('item')}}>js去详情+参数(query刷新会消失,state不会)</div>
+          <div onClick={this.testClick.bind(this, 'id', 'name')}>时间测试</div>
+          <Test />
         </div>
         <Nav index={3}></Nav>
       </div>
     )
   }
 }
+const mapStateToProps = state => ({
+  mine: state.mine
+})
+const actionCreators = { setWeather, setOnlineMovie }
+export default connect(mapStateToProps, actionCreators)(Mine)
+
+// <Weather weather={this.props.mine.weather}/>

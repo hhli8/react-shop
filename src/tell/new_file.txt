@@ -1,8 +1,0 @@
-自动打开关闭webpack运行后打开浏览器：
-  openBrowser(urls.localUrlForBrowser);
-  
-多页面webpack配置：未知
-
-参照admin后台开发：https://github.com/duxianwei520/react
-"react-redux": "^7.1.3",
-"redux-thunk": "^2.3.0",

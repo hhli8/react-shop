@@ -1,20 +1,11 @@
-//@font-face {
-//font-family: 'iconfont';  /* project id 1227212 */
-//src: url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.eot');
-//src: url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.eot?#iefix') format('embedded-opentype'),
-//url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.woff2') format('woff2'),
-//url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.woff') format('woff'),
-//url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.ttf') format('truetype'),
-//url('//at.alicdn.com/t/font_1227212_9t1rx4ckw1h.svg#iconfont') format('svg');
-//}
 @font-face {
   font-family: 'iconfont';  /* project id 1726957 */
-  src: url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.eot');
-  src: url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1726957_ln0nzzcbxqb.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.eot');
+  src: url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1726957_s00zjchaeqc.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -27,6 +18,9 @@
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
+}
+.flex1 {
+    flex: 1;
 }
 .justify-content-center {
     -webkit-box-pack: center;
@@ -59,4 +53,15 @@
 //}
 .am-toast {
     font-size: 26px !important;
+}
+
+// 页面
+.page-scroll-bottom {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    .tabBar-wrap {
+        position: static;
+        width: 100%;
+    }
 }

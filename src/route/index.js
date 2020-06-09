@@ -1,20 +1,15 @@
 import React from 'react'
-// { Suspense, lazy }
-// import { Router, Route, IndexRoute } from 'react-router'
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
-// import createHistory from 'history/createHashHistory'
-// import * as base from '@/pages/base' // 基础
-// import { createHashHistory } from 'history'
-//const Home = lazy(() => import('@/pages/default'))
-//const Classify = lazy(() => import('@/pages/classify'))
-//const Shopcar = lazy(() => import('@/pages/shopcar'))
-//const Mine = lazy(() => import('@/pages/mine'))
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+// HashRouter
+// import CacheRoute, { CacheSwitch } from 'react-router-cache-route'
 import asyncComponent from '@/utils/asyncComponent'
 
 import home from '@/pages/default'
 const shopCar = asyncComponent(() => import('@/pages/shopcar'))
 const classify = asyncComponent(() => import('@/pages/classify'))
 const mine = asyncComponent(() => import('@/pages/mine'))
+const movieDetail = asyncComponent(() => import('@/pages/gooddetail/movie'))
+const personDetail = asyncComponent(() => import('@/pages/gooddetail/person'))
 
 // const history = createHistory()
 // const history = createHashHistory()
@@ -33,21 +28,25 @@ const mine = asyncComponent(() => import('@/pages/mine'))
 //</Router>
 //)
 export default () => (
-  <HashRouter>
+  <BrowserRouter>
     <Switch>
       <Route path="/" exact component={home} />
       <Route path="/shopcar" component={shopCar} />
       <Route path="/classify" component={classify} />
       <Route path="/mine" component={mine} />
+      <Route path="/movie-detail/:id/:type" component={movieDetail} />
+      <Route path="/person-detail/:id" component={personDetail} />
       <Redirect to="/" />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 )
 
 //    <Route path="*" component={base.notfound} />
 //    <Route path="/login" render={() => <div>Home</div>} />
 
-
+//  <CacheSwitch>
+//    <CacheRoute path="/mine" component={mine} />
+//  </CacheSwitch>
 
 
 

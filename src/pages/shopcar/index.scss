@@ -1,5 +1,8 @@
 .page-shopcar {
-  padding: 20px 18px 168px 18px;
+  padding: 20px 18px 0 18px;
+  flex: 1;
+  box-sizing: border-box;
+  overflow: scroll;
     .item {
       background: #fff;
       margin-bottom: 20px;
@@ -107,3 +110,4 @@
   background: url('../../assets/img/icon-selected.png') no-repeat center;
   background-size: 100% 100%;
 }
+

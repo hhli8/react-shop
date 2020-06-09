@@ -1,0 +1,39 @@
+.p-mine-movie {
+    padding: 0 30px;
+    box-sizing: border-box;
+    .scroll {
+        white-space: nowrap;
+        overflow: scroll;
+    }
+    .item {
+        display: inline-block;
+        width: 260px;
+        overflow: hidden;
+        margin-right: 20px;
+        img {
+            height: 320px;
+            width: 100%;
+        }
+        .title {
+            height: 30px;
+            line-height: 30px;
+            font-size: 26px;
+            color: #333;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .tag {
+            height: 26px;
+            line-height: 26px;
+            font-size: 22px;
+            color: #939393;
+            margin-top: 10px;
+            span {
+                margin-right: 10px;
+            }
+        }
+    }
+    .item:last-child {
+        margin-right: 0;
+    }
+}

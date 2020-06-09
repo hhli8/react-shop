@@ -34,9 +34,10 @@ class Nav extends React.Component{
     return (
       <div className="tabBar-wrap">
         {this.slot}
-        <nav>{this.state.list}</nav>
+        <nav className="bottom-nav">{this.state.list}</nav>
       </div>
     )
   }
 }
- export default withRouter(Nav)
+
+export default withRouter(Nav)

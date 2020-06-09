@@ -34,7 +34,7 @@ class ShopCar extends React.Component{
   }
   render() {
     return (
-      <div>
+      <div className="page-scroll-bottom page-shopcar-f">
         <div className="page-shopcar">
           <ShopList list={this.props.shopcar.list}/>
         </div>
