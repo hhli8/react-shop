@@ -54,7 +54,7 @@ export default class Monline extends React.Component {
     var item = {
       name: 'no-prop'
     }
-    console.log(window.referer, document.referrer)
+    // console.log(window.referer, document.referrer)
     console.log(this.divRef.current) // 输出选择的dom
     console.log(this.refs.rrr)
     return (

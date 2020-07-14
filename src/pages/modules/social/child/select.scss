@@ -1,0 +1,48 @@
+.c-search {
+    height: 500px;
+    background: #fff url('~@/assets/img/head/1592716601(1).jpg') no-repeat center center;
+    background-size: 100% auto;
+    position: relative;
+    padding-top: 400px;
+    box-sizing: border-box;
+    .iconfont {
+        font-size: 42px;
+        color: #999;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+    }
+    &-box {
+        .search {
+            width: 700px;
+            margin: auto;
+            opacity: 0.6;
+            height: 88px;
+            position: relative;
+            border-radius: 6px;
+            background: #fff;
+        }
+    }
+    &-box-fixed {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding: 20px 0;
+        background: rgba(0, 0, 0, .2);
+        .search {
+            width: 600px;
+            margin: auto;
+            height: 68px;
+            position: relative;
+            border-radius: 6px;
+            background: #fff;
+        }
+    }
+    .copy {
+        opacity: 0;
+        position: absolute;
+        left: -100%;
+    }
+}

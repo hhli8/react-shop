@@ -1,0 +1,43 @@
+.p-travel {
+    padding: 0 20px;
+    background: #fff;
+    box-sizing: border-box;
+    .item {
+        border-bottom: 1px solid #BDBDBD;
+        padding: 20px 0;
+        &-title {
+            line-height: 32px;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+        .item-img-3 {
+            img {
+                width: 232px;
+                height: 120px;
+            }
+        }
+        .item-img-1 {
+            img {
+                height: auto;
+            }
+        }
+    }
+    .am-list-body::before {
+        background: transparent !important;
+    }
+    .am-pull-to-refresh-indicator {
+        font-size: 28px;
+        height: 42px;
+        line-height: 42px;
+    }
+    .am-pull-to-refresh-down .am-pull-to-refresh-indicator {
+        margin-top: -42px;
+    }
+    .am-icon-md {
+        width: 32px;
+        height: 32px;
+    }
+    .am-list-body {
+        border: none;
+    }
+}

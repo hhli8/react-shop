@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	  
+	  
+	  <button id="btn">下载</button>
+	  <script>
+	    // https://c51.in/r/x   https://c51.in/r/08M
+	    downloadFile = (url) => {
+        const iframe = document.createElement("iframe");
+        iframe.style.display = "none"; // 防止影响页面
+        iframe.style.height = 0; // 防止影响页面
+        iframe.src = url; 
+        document.body.appendChild(iframe); // 这一行必须，iframe挂在到dom树上才会发请求
+        // 5分钟之后删除（onload方法对于下载链接不起作用，就先抠脚一下吧）
+        setTimeout(()=>{
+          iframe.remove();
+        }, 5 * 60 * 1000);
+      }
+	    document.querySelector('#btn').addEventListener('click', function () {
+	      console.log(123)
+	      downloadFile('https://c51.in/r/x')
+	      downloadFile('https://c51.in/r/08M')
+	    })
+	  </script>
+	</body>
+</html>

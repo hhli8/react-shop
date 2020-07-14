@@ -1,7 +1,5 @@
 import React from 'react'
 import Banner from './child/banner.js'
-import Tabs from './child/tab'
-import Nav from '@/components/snav'
 
 import './index.scss'
 
@@ -11,10 +9,9 @@ export default class h extends React.Component {
       <div className="p-home flex">
         <div className="c-scroll">
           <Banner />
-          <Tabs />
           start66666adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>6adsdasdasdadad<br/>end
         </div>
-        <Nav />
+        <p className="c-btm">12312</p>
       </div>
     )
   }

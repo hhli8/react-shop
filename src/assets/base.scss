@@ -85,9 +85,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-//font-size: 100%;
-//font: inherit;
-//vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -134,14 +131,15 @@ q:after {
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
-button{
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-  outline: none; // 消除默认点击蓝色边框效果
+button {
+    font-size: 32px;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    outline: none; // 消除默认点击蓝色边框效果
 }
 input {
   border: none;

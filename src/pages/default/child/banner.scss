@@ -1,0 +1,19 @@
+.c-index-banner {
+    .slider-slide {
+        img {
+            height: 400px;
+        }
+    }
+    .am-carousel-wrap-dot > span {
+        width: 12px;
+        height: 12px;
+        margin: 0 5px;
+    }
+    .am-carousel-wrap-dot-active > span {
+        background: #fff;
+    }
+}
+.am-wingblank.am-wingblank-lg.c-index-banner {
+    margin-left: 0;
+    margin-right: 0;
+}

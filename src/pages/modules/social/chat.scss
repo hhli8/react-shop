@@ -1,0 +1,45 @@
+.p-chat {
+    flex-direction: column;
+    height: 100vh;
+    font-size: 20px;
+    .c-top {
+        height: 80px;
+        line-height: 80px;
+        font-size: 32px;
+        color: #000;
+        padding-left: 30px;
+        background: #fff;
+    }
+    .c-scroll {
+        flex: 1;
+        overflow: scroll;
+    }
+    .c-bottom {
+        padding: 20px 30px;
+        background: #fff;
+        align-items: center;
+        textarea {
+            font-size: 30px;
+            height: 30px;
+            line-height: 30px;
+//          max-height: 300px;
+            padding: 20px;
+            border-radius: 5px;
+            resize: none;
+        }
+        textarea::-webkit-scrollbar {
+            display: none;
+        }
+        .btn {
+            display: inline-block;
+            margin-left: 20px;
+            background: #08bf62;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 30px;
+        }
+    }
+}

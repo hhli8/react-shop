@@ -1,0 +1,12 @@
+.p-home {
+    font-size: 32px;
+    flex-direction: column;
+    height: 100vh;
+    .c-scroll {
+        flex: 1;
+        overflow: scroll;
+    }
+    .c-btm {
+        height: 80px;
+    }
+}
